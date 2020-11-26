@@ -1,0 +1,47 @@
+vnfd-catalog:
+    vnfd:
+    -   connection-point:
+        -   name: speed_tester/cp0
+            type: VPORT
+        -   name: speed_tester/cp1
+            type: VPORT
+        description: speed_tester container VNF
+        id: speed_tester
+        mgmt-interface:
+            cp: speed_tester/cp0
+        name: speed_tester
+        short-name: speed_tester
+        vdu:
+        -   count: '1'
+            description: speed_tester Docker container
+            id: speed_tester
+            image: mosaico_opennetvm
+            interface:
+            -   external-connection-point-ref: speed_tester/cp0
+                name: speed_tester0
+                position: 0
+                type: EXTERNAL
+                virtual-interface:
+                    type: VIRTIO
+            -   external-connection-point-ref: speed_tester/cp1
+                name: speed_tester1
+                position: 1
+                type: EXTERNAL
+                virtual-interface:
+                    type: VIRTIO
+            name: speed_tester
+            vdu-configuration:
+                initial-config-primitive:
+                -   name: opennetvm_conf
+                    parameter:
+                        -   name: bash
+                            value: cd examples/speed_tester/ ; ./go.sh <SID> -d <DID> -o pcap/pktgen_traffic_sample.pcap -c 100
+                        -   name: volumes
+                            value: /var/run:/var/run,/dev/hugepages:/dev/hugepages,/home/long/openNetVM:/openNetVM
+                    seq: '1'
+            vm-flavor:
+                memory-mb: 512
+                storage-gb: 10
+                vcpu-count: 1
+        vendor: Montimage
+        version: '1.1'

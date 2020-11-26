@@ -1,0 +1,101 @@
+nsd-catalog:
+    nsd:
+    -   id: 2flows_ns
+        name: 2flows_ns
+        short-name: 2flows_ns
+        description: 2flows_ns one VNF.
+        vendor: "Montimage"
+        version: '1.1'
+
+        constituent-vnfd:
+        -   member-vnf-index: '1'
+            vnfd-id-ref: flow_forward
+        -   member-vnf-index: '2'
+            vnfd-id-ref: firewall
+        -   member-vnf-index: '3'
+            vnfd-id-ref: simple_forward
+        -   member-vnf-index: '4'
+            vnfd-id-ref: speed_tester
+        
+
+        vld:
+        -   id: vl_1
+            description: VL 1
+            name: vl_1
+            short-name: vl_1
+            vim-network-name: default
+            type: ELAN
+            vendor: "Montimage"
+            version: '1.0'
+            mgmt-network: 'true'
+            vnfd-connection-point-ref:
+            -   member-vnf-index-ref: '4'
+                vnfd-connection-point-ref: speed_tester/cp1
+                vnfd-id-ref: speed_tester
+            -   member-vnf-index-ref: '1'
+                vnfd-connection-point-ref: flow_forward/cp0
+                vnfd-id-ref: flow_forward
+        -   id: vl_2
+            description: VL 2
+            name: vl_2
+            short-name: vl_2
+            vim-network-name: default
+            type: ELAN
+            vendor: "Montimage"
+            version: '1.0'
+            mgmt-network: 'true'
+            vnfd-connection-point-ref:
+            -   member-vnf-index-ref: '1'
+                vnfd-connection-point-ref: flow_forward/cp1
+                vnfd-id-ref: flow_forward
+            -   member-vnf-index-ref: '2'
+                vnfd-connection-point-ref: firewall/cp0
+                vnfd-id-ref: firewall
+        -   id: vl_3
+            description: VL 3
+            name: vl_3
+            short-name: vl_3
+            vim-network-name: default
+            type: ELAN
+            vendor: "Montimage"
+            version: '1.0'
+            mgmt-network: 'true'
+            vnfd-connection-point-ref:
+            -   member-vnf-index-ref: '1'
+                vnfd-connection-point-ref: flow_forward/cp1
+                vnfd-id-ref: flow_forward
+            -   member-vnf-index-ref: '3'
+                vnfd-connection-point-ref: simple_forward/cp0
+                vnfd-id-ref: simple_forward
+        -   id: vl_4
+            description: VL 4
+            name: vl_4
+            short-name: vl_4
+            vim-network-name: default
+            type: ELAN
+            vendor: "Montimage"
+            version: '1.0'
+            mgmt-network: 'true'
+            vnfd-connection-point-ref:
+            -   member-vnf-index-ref: '2'
+                vnfd-connection-point-ref: firewall/cp1
+                vnfd-id-ref: firewall
+            -   member-vnf-index-ref: '4'
+                vnfd-connection-point-ref: speed_tester/cp0
+                vnfd-id-ref: speed_tester
+        -   id: vl_5
+            description: VL 5
+            name: vl_5
+            short-name: vl_5
+            vim-network-name: default
+            type: ELAN
+            vendor: "Montimage"
+            version: '1.0'
+            mgmt-network: 'true'
+            vnfd-connection-point-ref:
+            -   member-vnf-index-ref: '3'
+                vnfd-connection-point-ref: simple_forward/cp1
+                vnfd-id-ref: simple_forward
+            -   member-vnf-index-ref: '4'
+                vnfd-connection-point-ref: speed_tester/cp0
+                vnfd-id-ref: speed_tester
