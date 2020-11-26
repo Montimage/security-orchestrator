@@ -1,0 +1,30 @@
+vnfd-catalog:
+  vnfd:
+  - connection-point:
+    - name: fire/cp0
+      type: VPORT
+    description: Empty example container VNF
+    id: fire
+    mgmt-interface:
+      cp: fire/cp0
+    name: fire
+    short-name: fire
+    vdu:
+    - count: '1'
+      description: Ubuntu Trusty default Docker container
+      id: ubuntu
+      image: ubuntu:trusty
+      interface:
+      - external-connection-point-ref: fire/cp0
+        name: fire0
+        position: 0
+        type: EXTERNAL
+        virtual-interface:
+          type: VIRTIO
+      name: ubuntu
+      vm-flavor:
+        memory-mb: 512
+        storage-gb: 10
+        vcpu-count: 1
+    vendor: Paderborn University
+    version: '1.1'

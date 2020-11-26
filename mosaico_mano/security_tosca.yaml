@@ -1,0 +1,58 @@
+vnfd:
+    -   fire_vnfd.yaml
+    -   ping_vnfd.yaml
+    -   pong_vnfd.yaml
+nsd:
+    -   firewall_nsd.yaml
+    -   router_nsd.yaml
+ns:
+    -   nsd_name: router
+        ns_name: router
+        vim_account: emu-vim1    
+policies:
+    -   deploy_firewall:
+        -   type: deploy_firewall
+            targets: [nfvo]
+            triggers:
+                -   ddos_no_firewall:              
+                    -   conditions:
+                        -   operation: AND
+                            condition_1: 
+                                -   triggred_by: [router_1,router_3]
+                                    metric: alert_ddos
+                                    value: 1
+                            condition_2: 
+                                -   triggred_by: nfvo
+                                    metric: ns_firewall
+                                    value: 0
+                        -   actions:
+                            -   deploy_firewall_nfv:
+                                    -   action_type: deploy
+                                        target: nfvo
+                                        nsd_name: firewall
+                                        vim_account: emu-vim1  
+                            -   redirect_traffic:
+                                    -   action_type: add
+                                        target: sdnc
+                                        rule: forward router to firewall
+    -   update_firewall:
+        -   type: update_firewall
+            targets: [sdnc]
+            triggers:
+                -   ddos_exist_firewall:              
+                    -   conditions:
+                        -   operation: AND
+                            condition_1: 
+                                -   triggred_by: [router_1,router_3]
+                                    metric: alert_ddos
+                                    value: 1
+                            condition_1: 
+                                -   triggred_by: nfvo
+                                    metric: ns_firewall
+                                    value: 1
+                    -   actions:
+                        -   redirect_traffic:
+                                -   action_type: add
+                                    target: sdnc
+                                    rule: forward router to firewall
+    

@@ -1,0 +1,521 @@
+imports:
+  - data.yaml
+  - doctor_nodes.yaml
+tosca_definitions_version: tosca_simple_profile_for_nfv_1_0_0
+description: Template for deploying DOCTOR security use case.
+metadata:
+  template_name: security_policies_example
+topology_template:
+  node_templates:
+
+##########################################################################
+# Virtual Network Functions
+##########################################################################
+
+    router_1:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 1
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU1
+    router_2:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 2
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU2
+    router_3:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 3
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU3
+    router_4:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 4
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU4
+    router_5:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 5
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU5
+    router_6:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 6
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU6
+    router_7:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 7
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU7
+    router_8:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 8
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU8
+
+##########################################################################
+# Virtual Network Functions
+##########################################################################
+
+    VDU1:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU1
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==uk']
+    VDU2:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU2
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==uk']
+    VDU3:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU3
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==germany']
+    VDU4:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU4
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==germany']
+    VDU5:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU5
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==netherlands']
+    VDU6:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU6
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==netherlands']
+    VDU7:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU7
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==netherlands']
+    VDU8:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU8
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==netherlands']
+
+##########################################################################
+# Virtual Network Functions
+##########################################################################
+
+    VDU1_VL1_2_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU1_VL1_2_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL1_2
+        - virtual_binding: VDU1
+    VDU1_VL1_3_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU1_VL1_3_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL1_3
+        - virtual_binding: VDU1
+    VDU1_VL1_4_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU1_VL1_4_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL1_4
+        - virtual_binding: VDU1
+    VDU1_VL1_5_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU1_VL1_5_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL1_5
+        - virtual_binding: VDU1
+    VDU1_VL1_6_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU1_VL1_6_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL1_6
+        - virtual_binding: VDU1
+    VDU1_VL1_7_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU1_VL1_7_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL1_7
+        - virtual_binding: VDU1
+    VDU1_VL1_8_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU1_VL1_8_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL1_8
+        - virtual_binding: VDU1
+    VDU2_VL2_3_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU2_VL2_3_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL2_3
+        - virtual_binding: VDU2
+    VDU2_VL2_4_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU2_VL2_4_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL2_4
+        - virtual_binding: VDU2
+    VDU2_VL2_5_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU2_VL2_5_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL2_5
+        - virtual_binding: VDU2
+    VDU2_VL2_6_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU2_VL2_6_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL2_6
+        - virtual_binding: VDU2
+    VDU2_VL2_7_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU2_VL2_7_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL2_7
+        - virtual_binding: VDU2
+    VDU2_VL2_8_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU2_VL2_8_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL2_8
+        - virtual_binding: VDU2
+    VDU3_VL3_4_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU3_VL3_4_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL3_4
+        - virtual_binding: VDU3
+    VDU3_VL3_5_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU3_VL3_5_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL3_5
+        - virtual_binding: VDU3
+    VDU3_VL3_6_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU3_VL3_6_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL3_6
+        - virtual_binding: VDU3
+    VDU3_VL3_7_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU3_VL3_7_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL3_7
+        - virtual_binding: VDU3
+    VDU3_VL3_8_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU3_VL3_8_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL3_8
+        - virtual_binding: VDU3
+    VDU4_VL4_5_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU4_VL4_5_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL4_5
+        - virtual_binding: VDU4
+    VDU4_VL4_6_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU4_VL4_6_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL4_6
+        - virtual_binding: VDU4
+    VDU4_VL4_7_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU4_VL4_7_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL4_7
+        - virtual_binding: VDU4
+    VDU4_VL4_8_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU4_VL4_8_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL4_8
+        - virtual_binding: VDU4
+    VDU5_VL5_6_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU5_VL5_6_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL5_6
+        - virtual_binding: VDU5
+    VDU5_VL5_7_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU5_VL5_7_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL5_7
+        - virtual_binding: VDU5
+    VDU5_VL5_8_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU5_VL5_8_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL5_8
+        - virtual_binding: VDU5
+    VDU6_VL6_7_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU6_VL6_7_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL6_7
+        - virtual_binding: VDU6
+    VDU6_VL6_8_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU6_VL6_8_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL6_8
+        - virtual_binding: VDU6
+    VDU7_VL7_8_CP:
+      type: tosca.nodes.nfv.doctor.Cpd
+      properties:
+        name: VDU7_VL7_8_CP
+        layer_protocol: VXLAN
+      requirements:
+        - virtual_link: VL7_8
+        - virtual_binding: VDU7
+
+##########################################################################
+# Virtual Network Functions
+##########################################################################
+
+    VL1_2:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL1_2
+        connectivity_type: VXLAN
+    VL1_3:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL1_3
+        connectivity_type: VXLAN
+    VL1_4:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL1_4
+        connectivity_type: VXLAN
+    VL1_5:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL1_5
+        connectivity_type: VXLAN
+    VL1_6:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL1_6
+        connectivity_type: VXLAN
+    VL1_7:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL1_7
+        connectivity_type: VXLAN
+    VL1_8:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL1_8
+        connectivity_type: VXLAN
+    VL2_3:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL2_3
+        connectivity_type: VXLAN
+    VL2_4:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL2_4
+        connectivity_type: VXLAN
+    VL2_5:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL2_5
+        connectivity_type: VXLAN
+    VL2_6:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL2_6
+        connectivity_type: VXLAN
+    VL2_7:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL2_7
+        connectivity_type: VXLAN
+    VL2_8:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL2_8
+        connectivity_type: VXLAN
+    VL3_4:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL3_4
+        connectivity_type: VXLAN
+    VL3_5:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL3_5
+        connectivity_type: VXLAN
+    VL3_6:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL3_6
+        connectivity_type: VXLAN
+    VL3_7:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL3_7
+        connectivity_type: VXLAN
+    VL3_8:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL3_8
+        connectivity_type: VXLAN
+    VL4_5:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL4_5
+        connectivity_type: VXLAN
+    VL4_6:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL4_6
+        connectivity_type: VXLAN
+    VL4_7:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL4_7
+        connectivity_type: VXLAN
+    VL4_8:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL4_8
+        connectivity_type: VXLAN
+    VL5_6:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL5_6
+        connectivity_type: VXLAN
+    VL5_7:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL5_7
+        connectivity_type: VXLAN
+    VL5_8:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL5_8
+        connectivity_type: VXLAN
+    VL6_7:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL6_7
+        connectivity_type: VXLAN
+    VL6_8:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL6_8
+        connectivity_type: VXLAN
+    VL7_8:
+      type: tosca.nodes.nfv.doctor.VnfVirtualLinkDesc
+      properties:
+        name: VL7_8
+        connectivity_type: VXLAN

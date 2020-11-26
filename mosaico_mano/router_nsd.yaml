@@ -1,0 +1,48 @@
+nsd-catalog:
+  nsd:
+  - constituent-vnfd:
+    - member-vnf-index: '1'
+      vnfd-id-ref: ping
+    - member-vnf-index: '2'
+      vnfd-id-ref: pong
+    - member-vnf-index: '3'
+      vnfd-id-ref: ping
+    description: Ping-pong example nentwork scenario with three VNFs.
+    id: router
+    name: router
+    short-name: router
+    vendor: Paderborn University
+    version: '1.1'
+    vld:
+    - description: Management VL
+      id: mgmt_vl
+      mgmt-network: 'true'
+      name: mgmt_vl
+      short-name: mgmt_vl
+      type: ELAN
+      vendor: Paderborn University
+      version: '1.0'
+      vim-network-name: default
+      vnfd-connection-point-ref:
+      - member-vnf-index-ref: '1'
+        vnfd-connection-point-ref: ping/cp0
+        vnfd-id-ref: ping
+      - member-vnf-index-ref: '2'
+        vnfd-connection-point-ref: pong/cp0
+        vnfd-id-ref: pong
+    - description: Management VL
+      id: mgmt_vl_2
+      mgmt-network: 'true'
+      name: mgmt_vl_2
+      short-name: mgmt_vl_2
+      type: ELAN
+      vendor: Paderborn University
+      version: '1.0'
+      vim-network-name: default
+      vnfd-connection-point-ref:
+      - member-vnf-index-ref: '3'
+        vnfd-connection-point-ref: ping/cp0
+        vnfd-id-ref: ping
+      - member-vnf-index-ref: '2'
+        vnfd-connection-point-ref: pong/cp0
+        vnfd-id-ref: pong

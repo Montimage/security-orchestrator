@@ -1,0 +1,314 @@
+imports:
+  - data.yaml
+  - doctor_nodes.yaml
+
+tosca_definitions_version: tosca_simple_profile_for_nfv_1_0_0
+
+description: Template for deploying DOCTOR's security use case.
+
+metadata:
+  template_name: security_policies_example
+
+topology_template:
+  node_templates:
+
+##########################################################################
+ # Virtual Network Functions
+##########################################################################
+
+    router_1:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 1
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU1
+
+
+    router_2:
+     type: tosca.nodes.nfv.doctor.VNF
+     properties:
+        id: 2
+        vendor: orange
+        version: 1.0
+     requirements:
+        - VDU: VDU2
+
+    router_3:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 3
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU3
+
+
+    router_4:
+     type: tosca.nodes.nfv.doctor.VNF
+     properties:
+        id: 4
+        vendor: orange
+        version: 1.0
+     requirements:
+        - VDU: VDU4
+
+    router_5:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 5
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU5
+
+
+    router_6:
+     type: tosca.nodes.nfv.doctor.VNF
+     properties:
+        id: 6
+        vendor: orange
+        version: 1.0
+     requirements:
+        - VDU: VDU6
+
+    router_7:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 7
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU7
+
+
+    router_8:
+     type: tosca.nodes.nfv.doctor.VNF
+     properties:
+        id: 8
+        vendor: orange
+        version: 1.0
+     requirements:
+        - VDU: VDU8
+    
+    router_9:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 9
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU9
+
+
+    router_10:
+     type: tosca.nodes.nfv.doctor.VNF
+     properties:
+        id: 10
+        vendor: orange
+        version: 1.0
+     requirements:
+        - VDU: VDU10
+
+    router_11:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 11
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU11
+
+
+    router_12:
+     type: tosca.nodes.nfv.doctor.VNF
+     properties:
+        id: 4
+        vendor: orange
+        version: 1.0
+     requirements:
+        - VDU: VDU12
+
+    router_13:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 13
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU13
+
+
+    router_14:
+     type: tosca.nodes.nfv.doctor.VNF
+     properties:
+        id: 14
+        vendor: orange
+        version: 1.0
+     requirements:
+        - VDU: VDU14
+
+    router_15:
+      type: tosca.nodes.nfv.doctor.VNF
+      properties:
+        id: 15
+        vendor: orange
+        version: 1.0
+      requirements:
+        - VDU: VDU15
+
+
+    router_16:
+     type: tosca.nodes.nfv.doctor.VNF
+     properties:
+        id: 16
+        vendor: orange
+        version: 1.0
+     requirements:
+        - VDU: VDU16
+
+
+##########################################################################
+ # Virtual Deployment Units
+##########################################################################
+
+    VDU1:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU1
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==uk']
+
+    VDU2:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU2
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==uk']
+    VDU3:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU3
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==uk']
+
+    VDU4:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU4
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==netherlands']
+
+    VDU5:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU5
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==netherlands']
+
+    VDU6:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU6
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==germany']
+    VDU7:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU7
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==germany']
+
+    VDU8:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU8
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==germany']
+
+    VDU9:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU9
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==uk']
+
+    VDU10:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU10
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==uk']
+    VDU11:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU11
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==uk']
+
+    VDU12:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU12
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==netherlands']
+
+    VDU13:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU13
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==netherlands']
+
+    VDU14:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU14
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==netherlands']
+    VDU15:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU15
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==germany']
+
+    VDU16:
+      type: tosca.nodes.nfv.doctor.VDU
+      properties:
+        name: VDU16
+        sw_image: maouadj/ndn_router:v2
+        config: /doctor/launch_nfd_router.sh
+        flavor: medium
+        placement_policy: ['popLocation==germany']
