@@ -1,0 +1,132 @@
++ exec /containernet/util/docker/entrypoint.sh python3 /vim-emu/examples/openstack_single_dc.py
+Running in chroot, ignoring request: is-active
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: show
+Running in chroot, ignoring request: start
+Pulling the "ubuntu:trusty" and "ubuntu:xenial" image for later use...
+trusty: Pulling from library/ubuntu
+Digest: sha256:63fce984528cec8714c365919882f8fb64c8a3edf23fdfa0b218a2756125456f
+Status: Image is up to date for ubuntu:trusty
+docker.io/library/ubuntu:trusty
+xenial: Pulling from library/ubuntu
+Digest: sha256:e02d30494327090a50e9a6575c018d067428ae3abdcadb208e9ecd9cb496cf98
+Status: Image is up to date for ubuntu:xenial
+docker.io/library/ubuntu:xenial
+Welcome to Containernet running within a Docker container ...
+*** Removing excess controllers/ofprotocols/ofdatapaths/pings/noxes
+killall controller ofprotocol ofdatapath ping nox_corelt-nox_core ovs-openflowd ovs-controllerovs-testcontroller udpbwtest mnexec ivs ryu-manager 2> /dev/null
+killall -9 controller ofprotocol ofdatapath ping nox_corelt-nox_core ovs-openflowd ovs-controllerovs-testcontroller udpbwtest mnexec ivs ryu-manager 2> /dev/null
+pkill -9 -f "sudo mnexec"
+*** Removing junk from /tmp
+rm -f /tmp/vconn* /tmp/vlogs* /tmp/*.out /tmp/*.log
+*** Removing old X11 tunnels
+*** Removing excess kernel datapaths
+ps ax | egrep -o 'dp[0-9]+' | sed 's/dp/nl:/'
+***  Removing OVS datapaths
+ovs-vsctl --timeout=1 list-br
+ovs-vsctl --if-exists del-br dc1.s1 -- --if-exists del-br fs1
+ovs-vsctl --timeout=1 list-br
+*** Removing all links of the pattern foo-ethX
+ip link show | egrep -o '([-_.[:alnum:]]+-eth[[:digit:]]+)'
+ip link show
+*** Killing stale mininet node processes
+pkill -9 -f mininet:
+*** Shutting down stale tunnels
+pkill -9 -f Tunnel=Ethernet
+pkill -9 -f .ssh/mn
+rm -f ~/.ssh/mn/*
+***  Removing SAP NAT rules
+*** Cleanup complete.
+*** Error setting resource limits. Mininet's performance may be affected.
+DEBUG:dcemulator.net:starting ryu-controller with ['ryu-manager', 'ryu.app.ofctl_rest', '--ofp-tcp-listen-port', '6653']
+Connecting to remote controller at 127.0.0.1:6653
+INFO:resourcemodel:Resource model registrar created with dc_emulation_max_cpu=1.0 and dc_emulation_max_mem=512
+DEBUG:dcemulator.node:created data center switch: dc1.s1
+INFO:dcemulator.net:added data center: dc1
+DEBUG:api.openstack.compute:Creating network with name mgmt
+name_or_id:  mgmt
+WARNING:api.openstack.compute:Could not find net 'mgmt' in dict_keys([]) or []
+DEBUG:api.openstack.compute:Creating network with name mgmtnet
+name_or_id:  mgmtnet
+WARNING:api.openstack.compute:Could not find net 'mgmtnet' in dict_keys(['88d26f12-dc45-4067-9b69-8b0a075bd1a3']) or ['mgmt']
+INFO:api.openstack.base:Starting KeystoneDummyApi endpoint @ http://0.0.0.0:6001
+INFO:api.openstack.base:Starting NeutronDummyApi endpoint @ http://0.0.0.0:10697
+INFO:api.openstack.base:Starting NovaDummyApi endpoint @ http://0.0.0.0:9775
+INFO:api.openstack.base:Starting HeatDummyApi endpoint @ http://0.0.0.0:9005
+INFO:api.openstack.base:Starting GlanceDummyApi endpoint @ http://0.0.0.0:10243
+DEBUG:dcemulator.net:addLink: n1=root intf1=root-eth0 -- n2=fs1 intf2=fs1-eth1
+*** Configuring hosts
+root 
+*** Starting controller
+c0 
+*** Starting 2 switches
+dc1.s1 fs1 ...
+*** Starting CLI:
+containernet> DEBUG:api.openstack.keystone:API CALL: KeystoneGetToken POST
+DEBUG:api.openstack.glance:API CALL: GlanceListImagesApi GET
+DEBUG:api.openstack.glance:Found 22 Docker images: ['mosaico_opennetvm:latest', 'ubuntu:xenial', 'ubuntu:trusty', 'vim-emu-img:latest', 'mongo:latest', 'mysql:5', 'opensourcemano/ro:8', 'opensourcemano/light-ui:8', 'opensourcemano/lcm:8', 'opensourcemano/mon:8', 'opensourcemano/nbi:8', 'opensourcemano/pol:8', 'opensourcemano/osmclient:8', 'grafana/grafana:latest', 'opensourcemano/keystone:8', 'mariadb:10', 'wurstmeister/kafka:2.11-1.0.2', 'containernet/containernet:latest', 'sdnfv/opennetvm:latest', 'wurstmeister/zookeeper:latest', 'google/cadvisor:latest', 'prom/prometheus:v2.4.3']
+DEBUG:api.openstack.glance:API CALL: GlanceSchema GET
+DEBUG:api.openstack.nova:API CALL: NovaListFlavorsDetails GET
+DEBUG:api.openstack.nova:API CALL: NovaListFlavorsDetails GET
+DEBUG:api.openstack.nova:API CALL: NovaListFlavors POST
+WARNING:api.openstack.nova:Create Flavor: {'name': 'ubuntu-flv', 'ram': 512, 'vcpus': 1, 'disk': 10, 'id': None, 'swap': 0, 'OS-FLV-EXT-DATA:ephemeral': 0, 'rxtx_factor': 1.0, 'os-flavor-access:is_public': True}
+DEBUG:api.openstack.glance:API CALL: GlanceListImagesApi GET
+DEBUG:api.openstack.glance:Found 22 Docker images: ['mosaico_opennetvm:latest', 'ubuntu:xenial', 'ubuntu:trusty', 'vim-emu-img:latest', 'mongo:latest', 'mysql:5', 'opensourcemano/ro:8', 'opensourcemano/light-ui:8', 'opensourcemano/lcm:8', 'opensourcemano/mon:8', 'opensourcemano/nbi:8', 'opensourcemano/pol:8', 'opensourcemano/osmclient:8', 'grafana/grafana:latest', 'opensourcemano/keystone:8', 'mariadb:10', 'wurstmeister/kafka:2.11-1.0.2', 'containernet/containernet:latest', 'sdnfv/opennetvm:latest', 'wurstmeister/zookeeper:latest', 'google/cadvisor:latest', 'prom/prometheus:v2.4.3']
+DEBUG:api.openstack.nova:API CALL: NovaListFlavorsDetails GET
+DEBUG:api.openstack.keystone:API CALL: KeystoneGetToken POST
+DEBUG:api.openstack.neutron:API CALL: NeutronListNetworks GET
+name_or_id:  default
+DEBUG:api.openstack.neutron:NeutronListNetworks RESPONSE (1): <Response 244 bytes [200 OK]>
+DEBUG:api.openstack.neutron:API CALL: NeutronCreatePort POST
+name_or_id:  default
+DEBUG:api.openstack.nova:API CALL: NovaListServersApi POST
+DEBUG:api.openstack.nova:DEBUGGGGGGGGGG: {'name': 'test-1-speedtester-1', 'imageRef': '9665da18-d130-427f-8fee-9d70b8d5a271', 'flavorRef': '63437db5-9080-403c-b43a-14135c13db64', 'min_count': 1, 'max_count': 1, 'networks': [{'port': '0befe65c-4e3d-49e0-8d3e-a6f975aac3f3'}]} 
+DEBUG:api.openstack.nova:DEBUGGGGGGGGGG name: test-1-speedtester-1 
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-1-speedtester-1' to '14569f858'
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-1-speedtester-1' to '14569f858'
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-1-speedtester-1' to '14569f858'
+DEBUG:api.openstack.compute:Starting new compute resources dc1_test-1-speedtester-1
+name_or_id:  default
+DEBUG:api.openstack.compute:Network dict: [{'id': 'ping0-0', 'ip': '192.168.100.3/24', 'ping0-0': 'default'}]
+DEBUG:api.openstack.compute:server dict: <emuvim.api.openstack.resources.server.Server object at 0x7fffec0e8128>
+DEBUG:dcemulator.node:Network dict: {}
+DEBUG:dcemulator.node:Starting compute instance 'dc1_test-1-speedtester-1' in data center 'dc1'
+1: 
+dc1_test-1-speedtester-1: kwargs {'ip': '10.0.0.1/8', 'datacenter': dc1, 'flavor_name': 'ubuntu-flv', 'environment': {'VNF_NAME': 'dc1_test-1-speedtester-1'}, 'volumes': ['/var/run:/var/run', '/dev/hugepages:/dev/hugepages', '/home/long/openNetVM:/openNetVM']}
+dc1_test-1-speedtester-1: update resources {'cpu_quota': -1}
+DEBUG:dcemulator.net:addLink: n1=dc1_test-1-speedtester-1 intf1=ping0-0 -- n2=dc1.s1 intf2=dc1.s1-eth1
+DEBUG:api.openstack.nova:API CALL: NovaShowServerDetails GET
+DEBUG:api.openstack.neutron:API CALL: NeutronCreatePort POST
+name_or_id:  default
+DEBUG:api.openstack.nova:API CALL: NovaListServersApi POST
+DEBUG:api.openstack.nova:DEBUGGGGGGGGGG: {'name': 'test-2-ubuntu-1', 'imageRef': '0af67e77-31f7-4a16-9bf4-6b18efda28e7', 'flavorRef': '63437db5-9080-403c-b43a-14135c13db64', 'min_count': 1, 'max_count': 1, 'networks': [{'port': 'be6e854b-34a5-4af3-a185-18415f43afcc'}]} 
+DEBUG:api.openstack.nova:DEBUGGGGGGGGGG name: test-2-ubuntu-1 
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-2-ubuntu-1' to '648d7ad49'
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-2-ubuntu-1' to '648d7ad49'
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-2-ubuntu-1' to '648d7ad49'
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-2-ubuntu-1' to '648d7ad49'
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-2-ubuntu-1' to '648d7ad49'
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-2-ubuntu-1' to '648d7ad49'
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-2-ubuntu-1' to '648d7ad49'
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-2-ubuntu-1' to '648d7ad49'
+DEBUG:api.openstack.compute:Shortened server name 'dc1_test-2-ubuntu-1' to '648d7ad49'
+DEBUG:api.openstack.compute:Starting new compute resources dc1_test-2-ubuntu-1
+name_or_id:  default
+DEBUG:api.openstack.compute:Network dict: [{'id': 'pong0-0', 'ip': '192.168.100.4/24', 'pong0-0': 'default'}]
+DEBUG:api.openstack.compute:server dict: <emuvim.api.openstack.resources.server.Server object at 0x7fffec0ffb00>
+DEBUG:dcemulator.node:Network dict: {}
+DEBUG:dcemulator.node:Starting compute instance 'dc1_test-2-ubuntu-1' in data center 'dc1'
+1: 
+ubuntu; trusty; None; sha256:c1950bc71f1b4a5b6617213ce252bc50136d8d379c532f2ce94795cba597115a
+ubuntu; trusty; None; sha256:c871c45b1573465016d2a378057b42004660f5bf2521c2ce6c96484673cb2a98
+dc1_test-2-ubuntu-1: kwargs {'ip': '10.0.0.2/8', 'datacenter': dc1, 'flavor_name': 'ubuntu-flv', 'environment': {'VNF_NAME': 'dc1_test-2-ubuntu-1'}, 'volumes': ['/var/run:/var/run', '/dev/hugepages:/dev/hugepages', '/home/long/openNetVM:/openNetVM']}
