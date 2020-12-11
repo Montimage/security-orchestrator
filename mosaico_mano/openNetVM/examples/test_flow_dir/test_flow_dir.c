@@ -71,6 +71,8 @@ static uint32_t print_delay = 1000000;
 
 static uint32_t destination;
 
+uint8_t id;
+
 /*
  * Print a usage message
  */
@@ -165,6 +167,8 @@ packet_handler(struct rte_mbuf *pkt, struct onvm_pkt_meta *meta,
 
         ret = onvm_flow_dir_get_pkt(pkt, &flow_entry);
         if (ret >= 0) {
+		printf("Found service chain\n");
+		onvm_sc_print(flow_entry->sc);
                 meta->action = ONVM_NF_ACTION_NEXT;
         } else {
                 ret = onvm_flow_dir_add_pkt(pkt, &flow_entry);
@@ -174,9 +178,20 @@ packet_handler(struct rte_mbuf *pkt, struct onvm_pkt_meta *meta,
                         return 0;
                 }
                 memset(flow_entry, 0, sizeof(struct onvm_flow_entry));
-                flow_entry->sc = onvm_sc_create();
-                onvm_sc_append_entry(flow_entry->sc, ONVM_NF_ACTION_TONF, destination);
-                // onvm_sc_print(flow_entry->sc);
+                printf(">>>>>>>>>>Creat new service chain\n");
+		flow_entry->sc = onvm_sc_create();
+                if(id==0){
+			onvm_sc_append_entry(flow_entry->sc, ONVM_NF_ACTION_TONF, 2);
+			onvm_sc_append_entry(flow_entry->sc, ONVM_NF_ACTION_TONF, 3);
+			onvm_sc_append_entry(flow_entry->sc, ONVM_NF_ACTION_OUT, pkt->port);
+			id=1;
+		}else{
+			onvm_sc_append_entry(flow_entry->sc, ONVM_NF_ACTION_TONF, 4);
+                        onvm_sc_append_entry(flow_entry->sc, ONVM_NF_ACTION_TONF, 5);
+                        onvm_sc_append_entry(flow_entry->sc, ONVM_NF_ACTION_OUT, pkt->port);
+			id=0;
+		}
+		onvm_sc_print(flow_entry->sc);
         }
         return 0;
 }
@@ -207,6 +222,7 @@ main(int argc, char *argv[]) {
         argc -= arg_offset;
         argv += arg_offset;
         destination = nf_local_ctx->nf->service_id + 1;
+        printf("%" PRIu32 "\n",destination);
 
         if (parse_app_args(argc, argv, progname) < 0)
                 rte_exit(EXIT_FAILURE, "Invalid command-line arguments\n");

@@ -62,16 +62,8 @@ def proxypost():
                                     elif(ns["name"]=="simple_2vnf_ns"):
                                         if(v["name"]=="simple_forward"):
                                             os.system('docker exec mn.dc1_'+sys.argv[2]+'-'+vnf["member-vnf-index"]+'-'+v["name"]+'-1 sh -c "'+cmd.replace("<SID>",str(sid+1)).replace("<DID>",str(sid+2))+'" &')
-                                        elif(v["name"]=="firewall"):
+                                        elif(v["name"]=="speed_tester"):
                                             os.system('docker exec mn.dc1_'+sys.argv[2]+'-'+vnf["member-vnf-index"]+'-'+v["name"]+'-1 sh -c "'+cmd.replace("<SID>",str(sid+2)).replace("<DID>",str(sid+1))+'" &')
-                                    elif(ns["name"]=="simple_firewall_ns"):
-                                        if(v["name"]=="simple_forward"):
-                                            os.system('docker exec mn.dc1_'+sys.argv[2]+'-'+vnf["member-vnf-index"]+'-'+v["name"]+'-1 sh -c "'+cmd.replace("<SID>",str(sid+1)).replace("<DID>",str(sid+2))+'" &')
-                                        elif(v["name"]=="firewall"):
-                                            os.system('docker exec mn.dc1_'+sys.argv[2]+'-'+vnf["member-vnf-index"]+'-'+v["name"]+'-1 sh -c "'+cmd.replace("<SID>",str(sid+2)).replace("<DID>","1")+'" &')
-                                    elif(ns["name"]=="simple_forward_ns"):
-                                        if(v["name"]=="simple_forward"):
-                                            os.system('docker exec mn.dc1_'+sys.argv[2]+'-'+vnf["member-vnf-index"]+'-'+v["name"]+'-1 sh -c "'+cmd.replace("<SID>",str(sid+1)).replace("<DID>","1")+'" &')                                        
                                     time.sleep(5)
                                 
             f = open("sid", "w")            

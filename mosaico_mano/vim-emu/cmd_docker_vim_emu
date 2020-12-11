@@ -1,5 +1,0 @@
-docker run --name vim-emu -it -d --rm --privileged --pid='host' --network=netosm --volume=/var/run:/var/run --volume=/dev/hugepages/:/dev/hugepages/ --volume=/home/long/openNetVM:/home/long/openNetVM -v /home/long/vim-emu:/vim-emu -v /var/run/docker.sock:/var/run/docker.sock vim-emu-img python3 /vim-emu/examples/openstack_single_dc.py
-volumes=['/var/run:/var/run','/dev/hugepages:/dev/hugepages','/home/long/openNetVM:/openNetVM']
-
-docker run --name montimage-mano -it -d --rm --privileged --pid='host' --network=netosm --volume=/var/run:/var/run --volume=/dev/hugepages/:/dev/hugepages/ --volume=/home/long/openNetVM:/home/long/openNetVM -v /home/long/vim-emu:/vim-emu -v /var/run/docker.sock:/var/run/docker.sock vim-emu-img /bin/bash
-

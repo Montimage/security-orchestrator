@@ -1,7 +1,7 @@
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
-osm ns-delete 2flows_nsi
-osm ns-delete simple_2vnf_nsi
+osm ns-delete 2flows_ns_1
+osm ns-delete 2flows_ns_2
 sleep 30
 osm ns-delete 2flows_nsi --force
 osm ns-delete simple_2vnf_nsi --force
