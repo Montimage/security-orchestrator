@@ -1,0 +1,10 @@
+policies:
+- policy:
+    actions:
+      action_type: block
+      object: attacker
+    targets: vfw2
+    triggers:
+      conditions:
+        event: sql injection
+        triggred_by: r3

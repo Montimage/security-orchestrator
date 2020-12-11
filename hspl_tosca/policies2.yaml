@@ -1,0 +1,46 @@
+policies:
+- policy:
+    actions:
+      action_type: block
+      object: attacker
+    targets: vfw2
+    triggers:
+      conditions:
+        event: sql injection
+        triggred_by: r3
+- policy:
+    actions:
+      action_type: block
+      object: 10.0.0.1
+    targets: vfw2
+    triggers:
+      conditions:
+        event: man in the middle
+        triggred_by: router 3
+- policy:
+    actions:
+      action_type: allow
+      object: user
+    targets: firewall
+    triggers:
+      conditions:
+        event: trojan
+        triggred_by: router 3
+- policy:
+    actions:
+      action_type: block
+      object: wissam
+    targets: vfw
+    triggers:
+      conditions:
+        event: trojan
+        triggred_by: wissam
+- policy:
+    actions:
+      action_type: allow
+      object: user
+    targets: fw
+    triggers:
+      conditions:
+        event: virus
+        triggred_by: router

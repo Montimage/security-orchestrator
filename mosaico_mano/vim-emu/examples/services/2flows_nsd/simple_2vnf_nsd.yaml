@@ -1,0 +1,33 @@
+nsd-catalog:
+    nsd:
+    -   id: simple_2vnf_ns
+        name: simple_2vnf_ns
+        short-name: simple_2vnf_ns
+        description: simple_2vnf_ns one VNF.
+        vendor: "Montimage"
+        version: '1.1'
+
+        constituent-vnfd:
+        -   member-vnf-index: '1'
+            vnfd-id-ref: simple_forward
+        -   member-vnf-index: '2'
+            vnfd-id-ref: speed_tester
+        
+
+        vld:
+        -   id: vl_1
+            description: VL 1
+            name: vl_1
+            short-name: vl_1
+            vim-network-name: default
+            type: ELAN
+            vendor: "Montimage"
+            version: '1.0'
+            mgmt-network: 'true'
+            vnfd-connection-point-ref:
+            -   member-vnf-index-ref: '2'
+                vnfd-connection-point-ref: speed_tester/cp1
+                vnfd-id-ref: speed_tester
+            -   member-vnf-index-ref: '1'
+                vnfd-connection-point-ref: simple_forward/cp0
+                vnfd-id-ref: simple_forward
