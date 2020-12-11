@@ -1,4 +1,0 @@
-includes: ['layer:basic', 'layer:vnfproxy']
-options:
-        basic:
-                use_venv: false

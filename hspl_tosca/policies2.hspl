@@ -1,6 +1,0 @@
-if sql injection is detected in r3, in vfw2, block attacker to access internet
-if man in the middle happens in router 3, in vfw2, block 10.0.0.1 to access internet
-if trojan attack is detected in router 3, allow only user by firewall
-if wissam is detected as a trojan, block wissam to access internet in vfw
-in router, if a virus is detected, in fw, allow only user
-in vfw, block attacker to access internet, if ddos happens in router 1
