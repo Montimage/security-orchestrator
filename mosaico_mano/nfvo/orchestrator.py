@@ -42,9 +42,6 @@ class Orchestrator(object):
 
     def setup_policies(self, tosca_policies):
         self.nfvo.setup_policies(tosca_policies)
-
-    def get_vnf_from_id(self, id):
-        return self.nfvo.get_vnf_from_id(id)
     
     def list_vnfd(self):
         return self.nfvo.list_vnfd(id)

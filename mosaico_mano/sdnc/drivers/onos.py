@@ -2,7 +2,7 @@ import requests
 import json
 
 class ONOS(object):
-    
+    #TODO
     def __init__(self,api,token):
         self.api=api #"http://192.168.0.16:8181/onos/v1/"
         self.token=token #"Basic b25vczpyb2Nrcw=="

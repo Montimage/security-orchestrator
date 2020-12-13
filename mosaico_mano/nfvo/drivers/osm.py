@@ -38,9 +38,6 @@ class OSM(object):
     def setup_policies(self, tosca_policies):
         pass
 
-    def get_vnf_from_id(self, id):
-        return
-
     def list_vnfd(self):
         result = subprocess.run(['osm', 'vnfd-list'], stdout=subprocess.PIPE)
         output=str(result.stdout.decode('ascii')).split('\n')
@@ -58,7 +55,7 @@ class OSM(object):
 
     def deploy_security_ns(self,path):
         with open(path) as f:
-            #TOSCA PARSER & SYSTEM MODEL
+            #TOSCA PARSER
             sys_model = yaml.load_all(f, Loader=yaml.FullLoader)
             #print(sys_model)
             for doc in sys_model:
@@ -76,3 +73,6 @@ class OSM(object):
                         for ns in v:                            
                             print(">>> NFVO <<< Deploy NS: "+ ns["ns_name"])                            
                             self.deploy_ns_instance(ns)
+                    elif(k=="policies"):
+                        for p in v:
+                            print(p)

@@ -18,6 +18,13 @@ CORS(app)
 def post_api_deploy():
     data=request.json        
     nfvo.deploy_security_ns(data["tosca"])
+    return {"status":"ok"}
+
+@app.route('/api/alert', methods=['POST'])
+def post_api_alert():
+    data=request.json        
+    nfvo.setup_policies(data["alert"])
+    return {"status":"ok"}
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5600,debug=True)
