@@ -23,7 +23,8 @@ class Policy(object):
 
     def nfvoAction(self):        
         if(self.policy['action']["type"]=="deploy_ns_instance"):
-            self.nfvo.deploy_ns_instance(self.policy['action']["ns"])                
+            for ns in self.policy['action']["ns"]:
+                self.nfvo.deploy_ns_instance(ns)
         
 
     def sdncAction(self):
