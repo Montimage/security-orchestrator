@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "onvm_sc_common.h": "c",
+        "tensor": "cpp"
+    }
+}
