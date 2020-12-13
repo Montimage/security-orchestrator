@@ -19,7 +19,6 @@ class Orchestrator(object):
             self.sdnc=ONOS("http://192.168.0.16:8181/onos/v1/","Basic b25vczpyb2Nrcw==")
         else:
             self.sdnc = None
-        self.policies = []
         if(nfvo_driver=="osm"):
             self.nfvo = OSM(vim_driver)
         else:

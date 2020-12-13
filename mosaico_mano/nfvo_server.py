@@ -28,9 +28,9 @@ def post_api_alert():
         condition_json["metric"]="alert_ddos"
         condition_json["value"]=1
     condition_json["triggred_by"]=data["trigger"]
-    print(nfvo.policies)
+    print(nfvo.nfvo.policies)
     print(condition_json)
-    for policy in nfvo.policies:
+    for policy in nfvo.nfvo.policies:
         if(policy.isPolicyTriggered(condition_json)):
             policy.triggerPolicy()
     return {"status":"ok"}
