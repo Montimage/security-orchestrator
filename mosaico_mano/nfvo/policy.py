@@ -16,9 +16,9 @@ class Policy(object):
 
     def triggerPolicy(self):        
         if(self.policy["target"]=="nfvo"):
-            self.nfvoAction(self.policy['action'])
+            self.nfvoAction()
         elif(self.policy["target"]=="sdnc"):
-            self.sdncAction(self.policy['action'])
+            self.sdncAction()
         
 
     def nfvoAction(self):        
