@@ -14,7 +14,7 @@ class OSM(object):
     def deploy_vim(self):      
         try:
             if(client.containers.get(self.vim).status=="exited") :
-                p1=subprocess.run(["docker", "stop", self.vim], stdout=subprocess.PIPE)            
+                p1=subprocess.run(["docker", "start", self.vim], stdout=subprocess.PIPE)            
         except:                                
             p1=subprocess.run(["docker", "run", "--name", self.vim, "-t", "-d", "--rm", "--privileged", "--pid=host", "--network=netosm", "-v", "/var/run/docker.sock:/var/run/docker.sock", "vim-emu-img", "python3","vim/drivers/"+self.vim+"/examples/openstack_single_dc.py"], stdout=subprocess.PIPE)        
         p2=subprocess.run(["export", "VIMEMU_HOSTNAME=$(sudo", "docker", "inspect", "-f", "'{{range", ".NetworkSettings.Networks}}{{.IPAddress}}{{end}}'", "vim-emu)"], stdout=subprocess.PIPE)        
