@@ -1,10 +1,10 @@
 vnfd:
-    -   fire_vnfd.yaml
-    -   ping_vnfd.yaml
-    -   pong_vnfd.yaml
+    -   tosca/fire_vnfd.yaml
+    -   tosca/ping_vnfd.yaml
+    -   tosca/pong_vnfd.yaml
 nsd:
-    -   firewall_nsd.yaml
-    -   router_nsd.yaml
+    -   tosca/firewall_nsd.yaml
+    -   tosca/router_nsd.yaml
 ns:
     -   nsd_name: router
         ns_name: router

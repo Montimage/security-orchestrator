@@ -28,7 +28,6 @@ class OSM(object):
         subprocess.run(['osm', 'vnfd-create',vnfd], stdout=subprocess.PIPE)
 
     def deploy_ns_instance(self,ns):
-        #subprocess.run(['osm', 'ns-create',ns], stdout=subprocess.PIPE)
         cmd=['osm', 'ns-create']
         for key,value in ns.items():
             cmd.append("--"+key)
@@ -60,9 +59,9 @@ class OSM(object):
         with open(path) as f:
             #TOSCA PARSER & SYSTEM MODEL
             sys_model = yaml.load_all(f, Loader=yaml.FullLoader)
-            print(sys_model)
+            #print(sys_model)
             for doc in sys_model:
-                print(doc)
+                #print(doc)
                 for k, v in doc.items():
                     if(k=="vnfd"):
                         for vnfd in v:
