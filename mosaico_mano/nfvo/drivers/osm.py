@@ -17,8 +17,8 @@ class OSM(object):
                 p1=subprocess.run(["docker", "start", self.vim], stdout=subprocess.PIPE)            
         except:                                
             p1=subprocess.run(["docker", "run", "--name", self.vim, "-t", "-d", "--rm", "--privileged", "--pid=host", "--network=netosm", "-v", "/var/run/docker.sock:/var/run/docker.sock", "vim-emu-img", "python3","vim/drivers/"+self.vim+"/examples/openstack_single_dc.py"], stdout=subprocess.PIPE)        
-        p2=subprocess.run(["export", "VIMEMU_HOSTNAME=$(sudo", "docker", "inspect", "-f", "'{{range", ".NetworkSettings.Networks}}{{.IPAddress}}{{end}}'", "vim-emu)"], stdout=subprocess.PIPE)        
-        p3=subprocess.run(["osm", "vim-create", "--name", "emu-vim1", "--user", "username", "--password", "password", "--auth_url", "http://$VIMEMU_HOSTNAME:6001/v2.0", "--tenant", "tenantName", "--account_type", "openstack"], stdout=subprocess.PIPE)
+        ip_vim=client.containers.get(self.vim).attrs['NetworkSettings']['IPAddress']
+        p3=subprocess.run(["osm", "vim-create", "--name", "emu-vim1", "--user", "username", "--password", "password", "--auth_url", "http://"+ip_vim+":6001/v2.0", "--tenant", "tenantName", "--account_type", "openstack"], stdout=subprocess.PIPE)
 
 
     def onboard_ns(self, nsd):
