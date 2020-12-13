@@ -4,8 +4,8 @@ import json
 class ONOS(object):
     
     def __init__(self,api,token):
-        self.api="http://192.168.0.16:8181/onos/v1/"
-        self.token="Basic b25vczpyb2Nrcw=="
+        self.api=api #"http://192.168.0.16:8181/onos/v1/"
+        self.token=token #"Basic b25vczpyb2Nrcw=="
 
     def get_list_host(self):
         print(">>> SDNC <<< Get list of Hosts")

@@ -3,44 +3,63 @@ import os
 import copy
 import time
 import subprocess
-import requests
-import json
-import time
-import sys
 import yaml
 
 class OSM(object):
 
     def __init__(self):
-        self.vim = None
-        self.vnfm = None
-
-    def deploy_vim(self):
         pass
 
-    def onboard_ns(self, ns_path):
-        subprocess.run(['osm', 'nsd-create',ns_path], stdout=subprocess.PIPE)
+    def deploy_vim(self):        
+        p1=subprocess.run(["docker", "run", "--name", "vim-emu", "-t", "-d", "--rm", "--privileged", "--pid='host'", "--network=netosm", "-v", "/var/run/docker.sock:/var/run/docker.sock", "vim-emu-img", "python3",self.vim+"/examples/openstack_single_dc.py"], stdout=subprocess.PIPE)        
+        p1.wait()
+        p2=subprocess.run(["export", "VIMEMU_HOSTNAME=$(sudo", "docker", "inspect", "-f", "'{{range", ".NetworkSettings.Networks}}{{.IPAddress}}{{end}}'", "vim-emu)"], stdout=subprocess.PIPE)        
+        p2.wait()
+        p3=subprocess.run(["osm", "vim-create", "--name", "emu-vim1", "--user", "username", "--password", "password", "--auth_url", "http://$VIMEMU_HOSTNAME:6001/v2.0", "--tenant", "tenantName", "--account_type", "openstack"], stdout=subprocess.PIPE)
+        p3.wait()
+
+
+    def onboard_ns(self, nsd):
+        subprocess.run(['osm', 'nsd-create',nsd], stdout=subprocess.PIPE)
 
     def onboard_vnf(self, vnfd):
         subprocess.run(['osm', 'vnfd-create',vnfd], stdout=subprocess.PIPE)
 
-    def create_vnf_instance(self, graph, vnf_name):
-        pass
-
-    def create_ns_instance(self):
-        pass
+    def deploy_ns_instance(self,ns):
+        #subprocess.run(['osm', 'ns-create',ns], stdout=subprocess.PIPE)
+        cmd=['osm', 'ns-create']
+        for key,value in ns.items():
+            cmd.append("--"+key)
+            cmd.append(value)
+        subprocess.run(cmd, stdout=subprocess.PIPE)
 
     def setup_policies(self, tosca_policies):
         pass
 
     def get_vnf_from_id(self, id):
-        pass
+        return
 
-    def deploy_security_network(self,path):
+    def list_vnfd(self):
+        result = subprocess.run(['osm', 'vnfd-list'], stdout=subprocess.PIPE)
+        output=str(result.stdout.decode('ascii')).split('\n')
+        return output
+
+    def list_nsd(self):
+        result = subprocess.run(['osm', 'nsd-list'], stdout=subprocess.PIPE)
+        output=str(result.stdout.decode('ascii')).split('\n')
+        return output
+    
+    def list_ns(self):
+        result = subprocess.run(['osm', 'ns-list'], stdout=subprocess.PIPE)
+        output=str(result.stdout.decode('ascii')).split('\n')
+        return output
+
+    def deploy_security_ns(self,path):
         with open(path) as f:
-            docs = yaml.load_all(f, Loader=yaml.FullLoader)
-            print(docs)
-            for doc in docs:
+            #TOSCA PARSER & SYSTEM MODEL
+            sys_model = yaml.load_all(f, Loader=yaml.FullLoader)
+            print(sys_model)
+            for doc in sys_model:
                 print(doc)
                 for k, v in doc.items():
                     if(k=="vnfd"):
@@ -52,10 +71,6 @@ class OSM(object):
                             print(">>> NFVO <<< Onboarding NSD: "+ nsd)
                             self.onboard_ns(nsd)
                     elif(k=="ns"):
-                        for ns in v:
-                            cmd=['osm', 'ns-create']
-                            for key,value in ns.items():
-                                cmd.append("--"+key)
-                                cmd.append(value)
-                            print(">>> NFVO <<< Deploy NS: "+ ns["ns_name"])
-                            result = subprocess.run(cmd, stdout=subprocess.PIPE)
+                        for ns in v:                            
+                            print(">>> NFVO <<< Deploy NS: "+ ns["ns_name"])                            
+                            self.deploy_ns_instance(ns)
