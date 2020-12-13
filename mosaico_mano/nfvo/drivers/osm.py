@@ -11,7 +11,7 @@ class OSM(object):
         self.vim = vim_driver
 
     def deploy_vim(self):        
-        p1=subprocess.run(["docker", "run", "--name", "vim-emu", "-t", "-d", "--rm", "--privileged", "--pid='host'", "--network=netosm", "-v", "/var/run/docker.sock:/var/run/docker.sock", "vim-emu-img", "python3",self.vim+"/examples/openstack_single_dc.py"], stdout=subprocess.PIPE)        
+        p1=subprocess.run(["docker", "run", "--name", "vim-emu", "-t", "-d", "--rm", "--privileged", "--pid=host", "--network=netosm", "-v", "/var/run/docker.sock:/var/run/docker.sock", "vim-emu-img", "python3",self.vim+"/examples/openstack_single_dc.py"], stdout=subprocess.PIPE)        
         p2=subprocess.run(["export", "VIMEMU_HOSTNAME=$(sudo", "docker", "inspect", "-f", "'{{range", ".NetworkSettings.Networks}}{{.IPAddress}}{{end}}'", "vim-emu)"], stdout=subprocess.PIPE)        
         p3=subprocess.run(["osm", "vim-create", "--name", "emu-vim1", "--user", "username", "--password", "password", "--auth_url", "http://$VIMEMU_HOSTNAME:6001/v2.0", "--tenant", "tenantName", "--account_type", "openstack"], stdout=subprocess.PIPE)
 
