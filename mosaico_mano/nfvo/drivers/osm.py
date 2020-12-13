@@ -74,5 +74,6 @@ class OSM(object):
                             print(">>> NFVO <<< Deploy NS: "+ ns["ns_name"])                            
                             self.deploy_ns_instance(ns)
                     elif(k=="policies"):
+                        print(v)
                         for p in v:
                             print(p)
