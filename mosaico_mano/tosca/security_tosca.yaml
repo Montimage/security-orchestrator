@@ -22,5 +22,8 @@ policies:
         action:
             name: deploy_firewall_ns
             type: deploy_ns_instance
-            nsd_name: firewall
-            vim_account: emu-vim1  
+            ns:
+                -   nsd_name: firewall
+                    ns_name: firewall
+                    vim_account: emu-vim1
+    
