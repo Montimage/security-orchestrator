@@ -39,7 +39,7 @@ class OSM(object):
         subprocess.run(cmd, stdout=subprocess.PIPE)
 
     def setup_policy(self, tosca_policy):
-        self.policies.append(Policy(tosca_policy,self,None))
+        return Policy(tosca_policy,self,None)
 
     def list_vnfd(self):
         result = subprocess.run(['osm', 'vnfd-list'], stdout=subprocess.PIPE)
@@ -78,4 +78,5 @@ class OSM(object):
                             self.deploy_ns_instance(ns)
                     elif(k=="policies"):
                         for p in v:
-                            self.setup_policy(p)
+                            self.policies.append(self.setup_policy(p))
+                            print(self.policies)
