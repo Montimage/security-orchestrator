@@ -7,8 +7,8 @@ import yaml
 
 class OSM(object):
 
-    def __init__(self):
-        pass
+    def __init__(self,vim_driver):
+        self.vim = vim_driver
 
     def deploy_vim(self):        
         p1=subprocess.run(["docker", "run", "--name", "vim-emu", "-t", "-d", "--rm", "--privileged", "--pid='host'", "--network=netosm", "-v", "/var/run/docker.sock:/var/run/docker.sock", "vim-emu-img", "python3",self.vim+"/examples/openstack_single_dc.py"], stdout=subprocess.PIPE)        

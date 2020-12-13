@@ -14,15 +14,15 @@ from sdnc.drivers.onos import ONOS
 class Orchestrator(object):
 
     def __init__(self,nfvo_driver,vim_driver,sdnc_driver):
-        self.vim = vim_driver
-        if(nfvo_driver=="osm"):
-            self.nfvo = OSM()
-        else:
-            self.nfvo = None
+        self.vim = vim_driver        
         if(nfvo_driver=="onos"):
             self.sdnc=ONOS("http://192.168.0.16:8181/onos/v1/","Basic b25vczpyb2Nrcw==")
         else:
             self.sdnc = None
+        if(nfvo_driver=="osm"):
+            self.nfvo = OSM(vim_driver)
+        else:
+            self.nfvo = None
         self.deploy_vim()
 
     def deploy_vim(self):
