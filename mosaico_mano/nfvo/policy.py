@@ -10,7 +10,7 @@ class Policy(object):
     def isPolicyTriggered(self,condition_json):
         isTriggered=False
         print(self.policy)
-        if(self.policy['condition']["triggred_by"]==condition_json["triggred_by"] and self.policy['condition']["metric"]==condition_json["metric"] and self.policy['condition']["value"]==condition_json["value"]):
+        if(self.policy['trigger']['condition']["triggred_by"]==condition_json["triggred_by"] and self.policy['trigger']['condition']["metric"]==condition_json["metric"] and self.policy['trigger']['condition']["value"]==condition_json["value"]):
             isTriggered=True
         return isTriggered
 
