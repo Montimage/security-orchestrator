@@ -18,3 +18,6 @@ CORS(app)
 def post_api_deploy():
     data=request.json        
     nfvo.deploy_security_ns(data["tosca"])
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5600,debug=True)
