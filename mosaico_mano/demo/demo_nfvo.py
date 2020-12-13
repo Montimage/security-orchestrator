@@ -12,6 +12,11 @@ with open(sys.argv[1]) as f:
     for doc in docs:
         
         for k, v in doc.items():
+            if(k=="policies"):
+                for p in v:
+                    print(p)
+                    #self.setup_policy(p)
+            """
             if(k=="vnfd"):
                 for vnfd in v:
                     print(">>> NFVO <<< Onboarding VNFD: "+ vnfd)
@@ -28,3 +33,4 @@ with open(sys.argv[1]) as f:
                         cmd.append(value)
                     print(">>> NFVO <<< Deploy NS: "+ ns["ns_name"])
                     result = subprocess.run(cmd, stdout=subprocess.PIPE)
+"""

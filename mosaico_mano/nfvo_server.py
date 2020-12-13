@@ -23,7 +23,14 @@ def post_api_deploy():
 @app.route('/api/alert', methods=['POST'])
 def post_api_alert():
     data=request.json        
-    nfvo.setup_policy(data["alert"])
+    condition_json={}
+    if(data["alert"]=="ddos"):    
+        condition_json["metric"]="alert_ddos"
+        condition_json["value"]=1
+    condition_json["triggred_by"]=data["trigger"]
+    for policy in nfvo.policies:
+        if(policy.isPolicyTriggered(condition_json)):
+            policy.triggerPolicy()
     return {"status":"ok"}
 
 if __name__ == '__main__':
