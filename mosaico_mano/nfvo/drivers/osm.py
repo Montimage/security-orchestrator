@@ -5,11 +5,14 @@ import time
 import subprocess
 import yaml
 import docker
+from nfvo.policy import Policy
+
 client = docker.from_env()
 class OSM(object):
 
     def __init__(self,vim_driver):
         self.vim = vim_driver
+        self.policies = []        
 
     def deploy_vim(self):      
         try:
@@ -35,8 +38,8 @@ class OSM(object):
             cmd.append(value)
         subprocess.run(cmd, stdout=subprocess.PIPE)
 
-    def setup_policies(self, tosca_policies):
-        pass
+    def setup_policy(self, tosca_policy):
+        self.policies.append(Policy(tosca_policy))
 
     def list_vnfd(self):
         result = subprocess.run(['osm', 'vnfd-list'], stdout=subprocess.PIPE)
@@ -74,6 +77,5 @@ class OSM(object):
                             print(">>> NFVO <<< Deploy NS: "+ ns["ns_name"])                            
                             self.deploy_ns_instance(ns)
                     elif(k=="policies"):
-                        print(v)
                         for p in v:
-                            print(p)
+                            self.setup_policy(p)

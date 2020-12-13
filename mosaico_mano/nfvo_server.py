@@ -23,7 +23,7 @@ def post_api_deploy():
 @app.route('/api/alert', methods=['POST'])
 def post_api_alert():
     data=request.json        
-    nfvo.setup_policies(data["alert"])
+    nfvo.setup_policy(data["alert"])
     return {"status":"ok"}
 
 if __name__ == '__main__':

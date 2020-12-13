@@ -19,6 +19,7 @@ class Orchestrator(object):
             self.sdnc=ONOS("http://192.168.0.16:8181/onos/v1/","Basic b25vczpyb2Nrcw==")
         else:
             self.sdnc = None
+        self.policies = []
         if(nfvo_driver=="osm"):
             self.nfvo = OSM(vim_driver)
         else:
@@ -40,8 +41,8 @@ class Orchestrator(object):
     def deploy_ns_instance(self, ns_name):
         self.nfvo.deploy_ns_instance(ns_name)
 
-    def setup_policies(self, tosca_policies):
-        self.nfvo.setup_policies(tosca_policies)
+    def setup_policy(self, tosca_policy):
+        self.nfvo.setup_policy(tosca_policy)
     
     def list_vnfd(self):
         return self.nfvo.list_vnfd(id)

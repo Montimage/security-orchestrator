@@ -10,18 +10,18 @@ ns:
         ns_name: router
         vim_account: emu-vim1    
 policies:
-    -   deploy_firewall:
-        -   type: deploy_firewall
-            targets: [nfvo]
-            triggers:
-                -   ddos_no_firewall:              
-                    -   conditions:
-                        -   triggred_by: [mmt_probe]
-                            metric: alert_ddos
-                            value: 1                            
-                    -   actions:
-                        -   deploy_firewall_nfv:
-                                -   action_type: deploy
-                                    target: nfvo
-                                    nsd_name: firewall
-                                    vim_account: emu-vim1  
+    -   name: deploy_firewall
+        type: deploy_firewall
+        targets: [nfvo]
+        triggers:
+            -   name:   ddos_no_firewall:              
+                conditions:
+                    -   triggred_by: [mmt_probe]
+                        metric: alert_ddos
+                        value: 1                            
+                actions:
+                    -   name: deploy_firewall_nfv
+                        action_type: deploy
+                        target: nfvo
+                        nsd_name: firewall
+                        vim_account: emu-vim1  
