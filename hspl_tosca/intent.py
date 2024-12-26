@@ -32,6 +32,8 @@ def predict(sentence):
     classifier = pickle.load(f)
     f.close()
     return(classifier.classify(features(sentence)))
-#train()
-#print(predict("block wissam to access internet in vfw"))
-#print(predict("in case of ddos attack deny attacker to access internet"))
+    
+if __name__ == "__main__":
+    train()
+    print(predict("block wissam to access internet in vfw"))
+    print(predict("in case of ddos attack deny attacker to access internet"))
