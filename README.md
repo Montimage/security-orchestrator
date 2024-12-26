@@ -3,7 +3,7 @@ The architecture of MANO follows the ETSI NFV MANO architecture, we only add a d
 
 The following figure shows us the internal architecture of the security orchestrator. 
 
-![Security Orchestartor's components](images/security-orchestrator-components.png)
+<img title="Security Orchestartor's components" src="images/security-orchestrator-components.png" width=500px/>
 
 # Installation
 
